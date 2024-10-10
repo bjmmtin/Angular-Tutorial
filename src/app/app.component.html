@@ -2,7 +2,7 @@
   <add-wish-form (addWish)="items.push($event)"></add-wish-form>
 
   <div class="row mt-3">
-    <wish-filter (filter)="filter = $event"></wish-filter>
+    <wish-filter [(filter)]="filter"></wish-filter>
   </div>
 
   <div class="row mt-3">

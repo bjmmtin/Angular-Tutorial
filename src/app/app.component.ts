@@ -29,5 +29,5 @@ export class AppComponent {
 
   title = 'wishList';
 
-  filter : any = ()=> {};
+  filter : any ;
 }
