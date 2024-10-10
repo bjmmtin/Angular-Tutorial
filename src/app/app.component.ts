@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../shared/models/wishItem';
 import { FormsModule } from '@angular/forms';
+
+const filters = [
+  (item: WishItem) => item,
+  (item: WishItem) => !item.isComplete,
+  (item: WishItem) => item.isComplete
+]
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,19 +23,17 @@ export class AppComponent {
     new WishItem('Get Coffe', true),
     new WishItem('Find Grass that cuts itself', true)
   ];
-  listFilter: String = '0';
-  newWishtext = "";
-  title = 'wishList';
-  visibleItems : WishItem[] = this.items;
 
-  filterChange(value : any){
-    if(value === '0')
-      this.visibleItems = this.items;
-    else if(value === '1')
-      this.visibleItems = this.items.filter(item => !item.isComplete);
-    else this.visibleItems = this.items.filter(item => item.isComplete);
-  }
+  listFilter: any = '0';
+
+  newWishtext = "";
   
+  title = 'wishList';
+
+  get visibleItems(): WishItem[] {
+    return this.items.filter(filters[this.listFilter])
+  };
+
   toggleItem(item: WishItem) {
     item.isComplete = !item.isComplete;
   }
