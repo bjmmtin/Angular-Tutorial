@@ -10,19 +10,17 @@ import events from '../../shared/services/EventService';
   styleUrl: './wish-list-item.component.css'
 })
 export class WishListItemComponent {
-  @Input() wishText!: string;
-  @Input() fullfilled!: boolean;
-  @Output() fullfilledChange = new EventEmitter<boolean>();
+  @Input() wish!: WishItem;
+
 
   get cssClasses() {
     // return this.fullfilled ? ['strikeout', 'text-muted'] : [];
-    return { 'strikeout': this.fullfilled, 'text-muted': this.fullfilled };
+    return { 'strikeout': this.wish.isComplete, 'text-muted': this.wish.isComplete };
   }
   removeWish(){
-    events.emit('removeWish', this.wishText);
+    events.emit('removeWish', this.wish);
   }
   toggleFullfilled() {
-    this.fullfilled = !this.fullfilled;
-    this.fullfilledChange.emit(this.fullfilled);
+    this.wish.isComplete = !this.wish.isComplete;
   }
 }

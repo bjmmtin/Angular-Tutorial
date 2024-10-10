@@ -23,17 +23,24 @@ import events from '../shared/services/EventService';
 })
 export class AppComponent {
   items: WishItem[] = [
-    new WishItem('TO learn Angular'),
+    new WishItem('To learn Angular'),
     new WishItem('Get Coffe', true),
     new WishItem('Find Grass that cuts itself', true)
   ];
 
-  constructor (){
-    events.listen('removeWish',(wish: any)=>{
-      console.log(wish);
-    })
+  constructor() {
+    events.listen('removeWish', (wish: any) => {
+      let index = this.items.indexOf(wish);
+      if (index !== -1) {
+        this.items.splice(index, 1);
+        console.log('Removed wish:', wish);
+      } else {
+        console.log('Wish not found:', wish);
+      }
+    });
+
   }
   title = 'wishList';
 
-  filter : any ;
+  filter: any;
 }
