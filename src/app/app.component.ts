@@ -16,4 +16,8 @@ export class AppComponent {
     new WishItem('Find Grass that cuts itself', true)
   ];
   title = 'wishList';
+
+  toggleItem(item : WishItem){
+    item.isComplete = !item.isComplete;
+  }
 }
