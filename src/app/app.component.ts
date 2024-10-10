@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
+import events from '../shared/services/EventService';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +16,7 @@ import { WishFilterComponent } from './wish-filter/wish-filter.component';
     FormsModule,
     WishListComponent,
     AddWishFormComponent,
-    WishFilterComponent
+    WishFilterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -27,6 +28,11 @@ export class AppComponent {
     new WishItem('Find Grass that cuts itself', true)
   ];
 
+  constructor (){
+    events.listen('removeWish',(wish: any)=>{
+      console.log(wish);
+    })
+  }
   title = 'wishList';
 
   filter : any ;
