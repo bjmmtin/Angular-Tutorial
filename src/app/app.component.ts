@@ -16,9 +16,19 @@ export class AppComponent {
     new WishItem('Get Coffe', true),
     new WishItem('Find Grass that cuts itself', true)
   ];
+  listFilter: String = '0';
   newWishtext = "";
   title = 'wishList';
+  visibleItems : WishItem[] = this.items;
 
+  filterChange(value : any){
+    if(value === '0')
+      this.visibleItems = this.items;
+    else if(value === '1')
+      this.visibleItems = this.items.filter(item => !item.isComplete);
+    else this.visibleItems = this.items.filter(item => item.isComplete);
+  }
+  
   toggleItem(item: WishItem) {
     item.isComplete = !item.isComplete;
   }
